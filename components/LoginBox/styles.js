@@ -1,21 +1,26 @@
 import styled from 'styled-components';
+import theme from '../../lib/theme';
 
-const LoginContainer = styled.div`
-  background-color: red;
-  width: 50vw;
-`;
 const LoginForm = styled.div`
   form {
     justify-content: center;
-    background-color: blue;
     display: flex;
     flex-direction: column;
+    min-width: 320px;
+    width: 400px;
   }
 `;
 const LoginTitle = styled.h3`
   text-align: center;
+  font-weight: bold;
   margin: 0;
   padding: 0;
 `;
 
-export { LoginContainer, LoginForm, LoginTitle };
+const cardStyles = {
+  card: {
+    backgroundColor: theme.white
+  }
+};
+
+export { LoginForm, LoginTitle, cardStyles };

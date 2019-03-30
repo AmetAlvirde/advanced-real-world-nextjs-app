@@ -1,7 +1,7 @@
 {
-  "name": "dead-simple-real-world-nextjs-app",
+  "name": "advanced-real-world-nextjs-app",
   "version": "1.0.0",
-  "description": "Tired of next.js toy examples that cannot be used in real, complex, business projects? This is for you",
+  "description": "Based on AmetAlvirde/dead-simple-real-world-nextjs-app but, with fairly complex additions and development patterns",
   "author": "Amet Alvirde <Amet.Alvirde@gmail.com>",
   "scripts": {
     "build": "next build",

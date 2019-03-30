@@ -79,7 +79,7 @@ class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Lato:400"
+            href="https://fonts.googleapis.com/css?family=Lato:400,600"
           />
         </Head>
         <body>

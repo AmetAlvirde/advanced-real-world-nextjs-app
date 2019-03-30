@@ -69,7 +69,7 @@ class MyApp extends App {
     return (
       <Container>
         <Head>
-          <title>Nextjs - M-ui - styled components - redux - cookie auth</title>
+          <title>Advanced real world Next Application</title>
         </Head>
         <JssProvider
           registry={this.pageContext.sheetsRegistry}
