@@ -1,8 +1,13 @@
 import React from 'react';
-import Login from '../components/Login';
+import LoginBox from '../components/LoginBox';
+import { LoginBoxWrapper } from '../pagesStyles/login';
 
 const LoginPage = () => {
-  return <Login />;
+  return (
+    <LoginBoxWrapper>
+      <LoginBox />
+    </LoginBoxWrapper>
+  );
 };
 
 LoginPage.isPublic = true;

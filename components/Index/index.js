@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { connect } from 'react-redux';
-import { logout } from '../Login/actions';
+import { logout } from '../LoginBox/actions';
 import NoUserFound from '../NoUserFound';
 
 const Index = ({ user, dispatch }) => {

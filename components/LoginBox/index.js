@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import useForm from '../../hooks/useForm';
 import { login } from './actions';
+import { LoginContainer, LoginTitle, LoginForm } from './styles';
 
 const Login = ({ router, dispatch }) => {
   const initialFormFields = { username: '', password: '' };
@@ -19,9 +20,9 @@ const Login = ({ router, dispatch }) => {
   }, initialFormFields);
 
   return (
-    <div className="container">
-      <div className="box">
-        <h3>Login</h3>
+    <LoginContainer>
+      <LoginTitle>Login</LoginTitle>
+      <LoginForm>
         <form onSubmit={handleSubmit}>
           <TextField
             id="username"
@@ -52,8 +53,8 @@ const Login = ({ router, dispatch }) => {
             Login
           </Button>
         </form>
-      </div>
-    </div>
+      </LoginForm>
+    </LoginContainer>
   );
 };
 

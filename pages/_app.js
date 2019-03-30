@@ -1,6 +1,3 @@
-/*
- * Initializes the Redux Provider with the store
- */
 import App, { Container } from 'next/app';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -9,13 +6,11 @@ import Head from 'next/head';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import JssProvider from 'react-jss/lib/JssProvider';
-import { whoAmI } from '../components/Login/actions';
+import { whoAmI } from '../components/LoginBox/actions';
 import withReduxStore from '../lib/with-redux-store';
 import getPageContext from '../lib/getPageContext';
 
-const loginPageUrl = '/login';
-
-class ExampleApp extends App {
+class MyApp extends App {
   constructor() {
     super();
     this.pageContext = getPageContext();
@@ -31,6 +26,7 @@ class ExampleApp extends App {
   static redirectToLogin(ctx) {
     const { req, res } = ctx;
     const isServer = typeof window === 'undefined';
+    const loginPageUrl = '/login';
     if (isServer) {
       res.writeHead(302, {
         Location: `${loginPageUrl}?next=${req.originalUrl}`
@@ -94,4 +90,4 @@ class ExampleApp extends App {
   }
 }
 
-export default withReduxStore(ExampleApp);
+export default withReduxStore(MyApp);
