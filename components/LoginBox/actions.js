@@ -6,14 +6,35 @@ const login = (payload, next = '/') => {
   return dispatch =>
     axios
       .post(`${BASE_URL}/api/Login`, payload)
-      .then(resp => {
-        dispatch({
-          type: 'SET_USER',
-          user: resp.data
-        });
+      .then(res => {
+        dispatch([
+          { type: 'SET_USER', user: res.data },
+          { type: 'SET_IS_LOADING', isLoading: false }
+        ]);
         Router.push(next);
       })
-      .catch(err => err);
+      .catch(({ response: { status } }) => {
+        if (status === 401) {
+          dispatch([
+            { type: 'SET_IS_LOADING', isLoading: false },
+            { type: 'SET_ERROR', message: 'Usuario o contraseña incorrectos' }
+          ]);
+        } else {
+          dispatch([
+            {
+              type: 'SET_ERROR',
+              message:
+                'Ocurrió un error inesperado, por favor intenta nuevamente'
+            },
+            { type: 'SET_IS_LOADING', isLoading: false }
+          ]);
+        }
+      });
+};
+
+const setIsLoading = payload => {
+  return dispatch =>
+    dispatch({ type: 'SET_IS_LOADING', isLoading: payload.isLoading });
 };
 
 const logout = () => {
@@ -54,4 +75,4 @@ const whoAmI = cookie => {
   };
 };
 
-export { login, logout, whoAmI };
+export { login, logout, setIsLoading, whoAmI };

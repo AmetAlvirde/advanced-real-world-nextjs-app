@@ -6,7 +6,6 @@ router.post('/api/login', (req, res) => {
   const { username, password } = req.body;
   if (username === 'admin' && password === 'password') {
     const user = {
-      id: 1,
       username: 'Admin',
       permissions: ['admin']
     };
