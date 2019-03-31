@@ -11,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import useForm from '../../hooks/useForm';
 import { login, setIsLoading } from './actions';
 import { LoginTitle, LoginForm, cardStyles } from './styles';
+import SnackbarNotification from '../SnackbarNotification';
 
 const Login = ({ error, isLoading, router, dispatch, classes }) => {
   const initialFormFields = { username: '', password: '' };
@@ -24,46 +25,49 @@ const Login = ({ error, isLoading, router, dispatch, classes }) => {
     dispatch(setIsLoading({ isLoading: true }));
   }, initialFormFields);
   return (
-    <Card raised className={classes.card}>
-      {isLoading && <LinearProgress />}
-      {error && <h1>{error}</h1>}
-      <CardContent>
-        <LoginTitle>LOGIN TO YOUR AWESOME APP</LoginTitle>
-        <LoginForm>
-          <form onSubmit={handleSubmit}>
-            <TextField
-              style={{ color: 'red' }}
-              id="username"
-              label="username"
-              name="username"
-              type="text"
-              margin="normal"
-              onChange={handleChange}
-              value={values.username}
-              variant="outlined"
-            />
-            <TextField
-              id="password"
-              label="password"
-              name="password"
-              type="password"
-              margin="normal"
-              value={values.password}
-              onChange={handleChange}
-              variant="outlined"
-            />
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              value="Login"
-            >
-              Login
-            </Button>
-          </form>
-        </LoginForm>
-      </CardContent>
-    </Card>
+    <>
+      <SnackbarNotification />
+      <Card raised className={classes.card}>
+        {isLoading && <LinearProgress />}
+        {error && <h1>{error}</h1>}
+        <CardContent>
+          <LoginTitle>LOGIN TO YOUR AWESOME APP</LoginTitle>
+          <LoginForm>
+            <form onSubmit={handleSubmit}>
+              <TextField
+                style={{ color: 'red' }}
+                id="username"
+                label="username"
+                name="username"
+                type="text"
+                margin="normal"
+                onChange={handleChange}
+                value={values.username}
+                variant="outlined"
+              />
+              <TextField
+                id="password"
+                label="password"
+                name="password"
+                type="password"
+                margin="normal"
+                value={values.password}
+                onChange={handleChange}
+                variant="outlined"
+              />
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                value="Login"
+              >
+                Login
+              </Button>
+            </form>
+          </LoginForm>
+        </CardContent>
+      </Card>
+    </>
   );
 };
 
