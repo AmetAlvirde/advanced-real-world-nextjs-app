@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import FormHelperText from '@material-ui/core/FormHelperText';
 import { withStyles } from '@material-ui/core/styles';
 import useForm from '../../hooks/useForm';
 import { clearSnackbar, login, setIsLoading } from './actions';
@@ -15,7 +16,7 @@ import SnackbarNotification from '../SnackbarNotification';
 
 const Login = ({ error, isLoading, router, dispatch, classes, variant }) => {
   const initialFormFields = { username: '', password: '' };
-  const { values, handleChange, handleSubmit } = useForm(() => {
+  const { values, errors, handleChange, handleSubmit } = useForm(() => {
     const { query } = router;
     const next = query.next || '/';
     dispatch(clearSnackbar());
@@ -25,13 +26,14 @@ const Login = ({ error, isLoading, router, dispatch, classes, variant }) => {
     );
     dispatch(setIsLoading({ isLoading: true }));
   }, initialFormFields);
+
   return (
     <>
       {error && (
         <SnackbarNotification
-          autoHideDuration="2000"
+          autoHideDuration={2000}
           vertical="bottom"
-          horizontal="left"
+          horizontal="right"
           message={error}
           variant={variant}
         />
@@ -40,9 +42,14 @@ const Login = ({ error, isLoading, router, dispatch, classes, variant }) => {
       <Card raised className={classes.card}>
         {isLoading && <LinearProgress />}
         <CardContent>
-          <LoginTitle>LOGIN TO YOUR AWESOME APP</LoginTitle>
+          <LoginTitle>Welcome to your awesome app</LoginTitle>
           <LoginForm>
             <form onSubmit={handleSubmit}>
+              {errors.noUsername && (
+                <FormHelperText className={classes.errorHint}>
+                  {errors.noUsername}
+                </FormHelperText>
+              )}
               <TextField
                 style={{ color: 'red' }}
                 id="username"
@@ -50,28 +57,38 @@ const Login = ({ error, isLoading, router, dispatch, classes, variant }) => {
                 name="username"
                 type="text"
                 margin="normal"
+                error={!!errors.noUsername}
                 onChange={handleChange}
                 value={values.username}
                 variant="outlined"
               />
+              {errors.noPassword && (
+                <FormHelperText className={classes.errorHint}>
+                  {errors.noPassword}
+                </FormHelperText>
+              )}
               <TextField
                 id="password"
                 label="password"
                 name="password"
                 type="password"
                 margin="normal"
+                error={!!errors.noPassword}
                 value={values.password}
                 onChange={handleChange}
                 variant="outlined"
               />
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                value="Login"
-              >
-                Login
-              </Button>
+              <div className={classes.loginButtonWrapper}>
+                <Button
+                  variant="contained"
+                  className={classes.loginButton}
+                  color="primary"
+                  type="submit"
+                  value="Login"
+                >
+                  Login
+                </Button>
+              </div>
             </form>
           </LoginForm>
         </CardContent>

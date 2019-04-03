@@ -1,6 +1,6 @@
 # Advanced real world Nextjs app
 
-This is an advanced vesion of [dead-simple-real-world-app][1], if you are just
+This is an advanced version of [dead-simple-real-world-app][1], if you are just
 getting started, I highly recommend you to start there. Then, when you feel
 comfortable, get back here.
 
@@ -16,6 +16,7 @@ real world app, this is for you.
 - Styled, out of the box. I'm not a designer, buy it's pretty decent
 - Loaders integration
 - Notifications via snackbars
+- Form Validation (Through custom hooks)
 
 ## Let's code!
 
@@ -59,7 +60,6 @@ Husky for it to set its git hooks.
 - Icon Component for SVG icons integration
 - Tests
 - Progressive Web App
-- API's consumption
 
 [1]: https://github.com/AmetAlvirde/dead-simple-real-world-nextjs-app
 [2]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
