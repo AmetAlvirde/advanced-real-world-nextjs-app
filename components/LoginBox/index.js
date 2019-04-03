@@ -9,15 +9,16 @@ import CardContent from '@material-ui/core/CardContent';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { withStyles } from '@material-ui/core/styles';
 import useForm from '../../hooks/useForm';
-import { login, setIsLoading } from './actions';
+import { clearSnackbar, login, setIsLoading } from './actions';
 import { LoginTitle, LoginForm, cardStyles } from './styles';
 import SnackbarNotification from '../SnackbarNotification';
 
-const Login = ({ error, isLoading, router, dispatch, classes }) => {
+const Login = ({ error, isLoading, router, dispatch, classes, variant }) => {
   const initialFormFields = { username: '', password: '' };
   const { values, handleChange, handleSubmit } = useForm(() => {
     const { query } = router;
     const next = query.next || '/';
+    dispatch(clearSnackbar());
     dispatch(
       login({ username: values.username, password: values.password }),
       next
@@ -26,10 +27,18 @@ const Login = ({ error, isLoading, router, dispatch, classes }) => {
   }, initialFormFields);
   return (
     <>
-      <SnackbarNotification />
+      {error && (
+        <SnackbarNotification
+          autoHideDuration="2000"
+          vertical="bottom"
+          horizontal="left"
+          message={error}
+          variant={variant}
+        />
+      )}
+
       <Card raised className={classes.card}>
         {isLoading && <LinearProgress />}
-        {error && <h1>{error}</h1>}
         <CardContent>
           <LoginTitle>LOGIN TO YOUR AWESOME APP</LoginTitle>
           <LoginForm>
@@ -75,19 +84,22 @@ Login.propTypes = {
   router: PropTypes.instanceOf(Object).isRequired,
   classes: PropTypes.instanceOf(Object).isRequired,
   error: PropTypes.string,
+  variant: PropTypes.string,
   dispatch: PropTypes.func.isRequired,
   isLoading: PropTypes.bool
 };
 Login.defaultProps = {
   isLoading: false,
-  error: ''
+  error: '',
+  variant: ''
 };
 
 const mapStateToProps = state => {
   return {
     user: state.auth.user,
     isLoading: state.auth.isLoading,
-    error: state.auth.error
+    error: state.auth.error,
+    variant: state.auth.variant
   };
 };
 

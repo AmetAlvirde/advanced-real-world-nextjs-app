@@ -1,17 +1,18 @@
 import { makeStyles } from '@material-ui/styles';
+import theme from '../../lib/theme';
 
 const snackbarContentWrapperStyles = makeStyles(() => ({
   success: {
-    backgroundColor: 'green'
+    backgroundColor: theme.success
   },
   error: {
-    backgroundColor: 'blue'
+    backgroundColor: theme.error
   },
   info: {
-    backgroundColor: 'blue'
+    backgroundColor: theme.info
   },
   warning: {
-    backgroundColor: 'yellow'
+    backgroundColor: theme.warning
   },
   icon: {
     fontSize: 20

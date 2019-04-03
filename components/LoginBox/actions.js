@@ -2,6 +2,14 @@ import axios from 'axios';
 import Router from 'next/router';
 import BASE_URL from './constants';
 
+axios.defaults.timeout = 5000;
+
+const clearSnackbar = () => {
+  return dispatch => {
+    dispatch({ type: 'SET_ERROR', message: '' });
+  };
+};
+
 const login = (payload, next = '/') => {
   return dispatch =>
     axios
@@ -13,16 +21,21 @@ const login = (payload, next = '/') => {
         ]);
         Router.push(next);
       })
-      .catch(({ response: { status } }) => {
-        if (status === 401) {
+      .catch(response => {
+        if (response.response && response.response.status === 401) {
           dispatch([
             { type: 'SET_IS_LOADING', isLoading: false },
-            { type: 'SET_ERROR', message: 'Usuario o contraseña incorrectos' }
+            {
+              type: 'SET_ERROR',
+              message: 'Usuario o ocntraseña incorrectos',
+              variant: 'error'
+            }
           ]);
         } else {
           dispatch([
             {
               type: 'SET_ERROR',
+              variant: 'error',
               message:
                 'Ocurrió un error inesperado, por favor intenta nuevamente'
             },
@@ -75,4 +88,4 @@ const whoAmI = cookie => {
   };
 };
 
-export { login, logout, setIsLoading, whoAmI };
+export { clearSnackbar, login, logout, setIsLoading, whoAmI };

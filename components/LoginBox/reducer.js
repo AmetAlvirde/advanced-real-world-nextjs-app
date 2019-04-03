@@ -16,7 +16,7 @@ export default function(state = initialState, action) {
       return { ...state, isLoading: action.isLoading };
     }
     case 'SET_ERROR': {
-      return { ...state, error: action.message };
+      return { ...state, error: action.message, variant: action.variant };
     }
     default: {
       return state;

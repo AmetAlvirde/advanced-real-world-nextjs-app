@@ -14,6 +14,8 @@ real world app, this is for you.
 - A more deep integration between material-ui JSS and styled components
 - A more complex container/functional components react architecture
 - Styled, out of the box. I'm not a designer, buy it's pretty decent
+- Loaders integration
+- Notifications via snackbars
 
 ## Let's code!
 
@@ -54,12 +56,10 @@ Husky for it to set its git hooks.
 
 ### What's to come:
 
-- Loaders integration
 - Icon Component for SVG icons integration
 - Tests
 - Progressive Web App
 - API's consumption
-- Alerts and snackbars integration
 
 [1]: https://github.com/AmetAlvirde/dead-simple-real-world-nextjs-app
 [2]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint

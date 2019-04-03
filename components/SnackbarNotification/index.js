@@ -1,16 +1,18 @@
 import Snackbar from '@material-ui/core/Snackbar';
-import Button from '@material-ui/core/Button';
 import React from 'react';
+import PropTypes from 'prop-types';
 import MySnackbarContentWrapper from './SnackbarContentWrapper';
 import { notificationSnackbarStyles } from './styles';
 
-function NotificationSnackbar() {
-  const classes = notificationSnackbarStyles();
-  const [open, setOpen] = React.useState(false);
-
-  function handleClick() {
-    setOpen(true);
-  }
+function NotificationSnackbar({
+  autoHideDuration,
+  horizontal,
+  message,
+  variant,
+  vertical
+}) {
+  const [open, setOpen] = React.useState(true);
+  notificationSnackbarStyles();
 
   function handleClose(event, reason) {
     if (reason === 'clickaway') {
@@ -20,27 +22,36 @@ function NotificationSnackbar() {
   }
 
   return (
-    <div>
-      <Button className={classes.margin} onClick={handleClick}>
-        Open success snackbar
-      </Button>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left'
-        }}
-        open={open}
-        autoHideDuration={1000}
+    <Snackbar
+      anchorOrigin={{
+        vertical,
+        horizontal
+      }}
+      open={open}
+      autoHideDuration={autoHideDuration}
+      onClose={handleClose}
+    >
+      <MySnackbarContentWrapper
         onClose={handleClose}
-      >
-        <MySnackbarContentWrapper
-          onClose={handleClose}
-          variant="success"
-          message="This is a success message!"
-        />
-      </Snackbar>
-    </div>
+        variant={variant}
+        message={message}
+      />
+    </Snackbar>
   );
 }
+
+NotificationSnackbar.propTypes = {
+  autoHideDuration: PropTypes.number,
+  message: PropTypes.string.isRequired,
+  variant: PropTypes.string.isRequired,
+  vertical: PropTypes.string,
+  horizontal: PropTypes.string
+};
+
+NotificationSnackbar.defaultProps = {
+  autoHideDuration: 2000,
+  vertical: 'bottom',
+  horizontal: 'left'
+};
 
 export default NotificationSnackbar;
