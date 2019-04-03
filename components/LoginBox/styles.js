@@ -8,6 +8,15 @@ const LoginForm = styled.div`
     flex-direction: column;
     min-width: 320px;
     width: 400px;
+    @media (max-width: 400px) {
+      min-width: 320px;
+      width: 300px;
+    }
+    @media (max-width: 350px) {
+      min-width: 290px;
+      width: 300px;
+      width: 290px;
+    }
   }
 `;
 const LoginTitle = styled.h3`
